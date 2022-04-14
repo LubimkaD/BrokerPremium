@@ -1,4 +1,5 @@
-﻿using BrokerPremium.Models;
+﻿using BrokerPremium.Core.Constants;
+using BrokerPremium.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -15,6 +16,7 @@ namespace BrokerPremium.Controllers
 
         public IActionResult Index()
         {
+            ViewData[MessageConstant.ErrorMessage] = "Error!";
             return View();
         }
 
