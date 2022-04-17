@@ -16,7 +16,7 @@ namespace BrokerPremium.Controllers
 
         public IActionResult Index()
         {
-            ViewData[MessageConstant.ErrorMessage] = "Error!";
+            ViewData[MessageConstant.SuccessMessage] = "Success!";
             return View();
         }
 
