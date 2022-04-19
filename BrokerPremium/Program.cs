@@ -2,25 +2,14 @@ using BrokerPremium.Core.Constants;
 using BrokerPremium.Infrastructure.Data;
 using BrokerPremium.ModelBinders;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+using Micrososft.Extensions.DependecyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
-//var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection");
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+builder.Services.AddApplicationDbContexts(builder.Configuration);
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();;
 
-// Add services to the container.
-//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-//builder.Services.AddDbContext<ApplicationDbContext>(options =>
-//    options.UseSqlServer(connectionString));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
-//builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-//    .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews()
     .AddMvcOptions(options =>
     {
@@ -28,6 +17,8 @@ builder.Services.AddControllersWithViews()
         options.ModelBinderProviders.Insert(1, new DateTimeModelBinderProvider(FormattingConstant.NormalDateFormat));
         options.ModelBinderProviders.Insert(2, new DoubleModelBinderProvider());
     });
+
+builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 

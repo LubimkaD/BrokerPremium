@@ -14,10 +14,10 @@ namespace BrokerPremium.Infrastructure.Data.Models
 
         [Required]
         [StringLength(10)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
     }
 }

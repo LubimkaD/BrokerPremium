@@ -40,9 +40,9 @@ namespace BrokerPremium.Infrastructure.Data.Models
         [Column(TypeName = "decimal")]
         public decimal InsCommission { get; set; }
 
-        public ICollection<InsuredObject>? InsuredObjects { get; set; }
+        public IList<InsuredObject>? InsuredObjects { get; set; } = new List<InsuredObject>();
 
-        public ICollection<InsuranceClaim>? InsClaims { get; set; }
+        public IList<InsuranceClaim>? InsClaims { get; set; } = new List<InsuranceClaim>();
 
         [Required]
         public int InsurerId { get; set; }

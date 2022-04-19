@@ -43,6 +43,6 @@ namespace BrokerPremium.Infrastructure.Data.Models
         [Column(TypeName = "date")]
         public DateTime? DateValidTo { get; set; }
 
-        public ICollection<InsurancePolicy>? InsurancePolices { get; set; }
+        public IList<InsurancePolicy>? InsurancePolices { get; set; } = new List<InsurancePolicy>();
     }
 }
