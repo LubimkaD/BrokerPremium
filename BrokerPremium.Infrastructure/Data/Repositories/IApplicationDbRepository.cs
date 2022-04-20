@@ -1,8 +1,8 @@
 ﻿using BrokerPremium.Infrastructure.Data.Common;
 
-namespace Warehouse.Infrastructure.Data.Repositories
+namespace BrokerPremium.Infrastructure.Data.Repositories
 {
-    public interface IApplicatioDbRepository : IRepository
+    public interface IApplicationDbRepository : IRepository
     {
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BrokerPremium.Infrastructure.Data;
+using BrokerPremium.Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Micrososft.Extensions.DependecyInjection
@@ -7,7 +8,7 @@ namespace Micrososft.Extensions.DependecyInjection
     {
         public static IServiceCollection AddApiServices(this IServiceCollection services)
         {
-            //services.AddScoped<IApplicationDbRepository ApplicationDbRepository>();
+            services.AddScoped<IApplicationDbRepository, ApplicationDbRepository>();
 
             return services;
         }
