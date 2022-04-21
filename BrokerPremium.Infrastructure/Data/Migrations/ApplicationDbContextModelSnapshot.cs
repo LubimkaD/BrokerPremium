@@ -4,7 +4,6 @@ using BrokerPremium.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -12,10 +11,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BrokerPremium.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220418195525_DBTablesCreation")]
-    partial class DBTablesCreation
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -136,7 +134,7 @@ namespace BrokerPremium.Infrastructure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CustomerId")
+                    b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateValidFrom")
@@ -502,9 +500,11 @@ namespace BrokerPremium.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("BrokerPremium.Infrastructure.Data.Models.InsurancePolicy", b =>
                 {
-                    b.HasOne("BrokerPremium.Infrastructure.Data.Models.Customer", null)
+                    b.HasOne("BrokerPremium.Infrastructure.Data.Models.Customer", "Customer")
                         .WithMany("InsurancePolices")
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("BrokerPremium.Infrastructure.Data.Models.Insurer", "Insurer")
                         .WithMany()
@@ -517,6 +517,8 @@ namespace BrokerPremium.Infrastructure.Data.Migrations
                         .HasForeignKey("TypeOfInsuranceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Customer");
 
                     b.Navigation("Insurer");
 

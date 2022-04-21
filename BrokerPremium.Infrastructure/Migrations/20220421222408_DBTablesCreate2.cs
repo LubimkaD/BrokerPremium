@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BrokerPremium.Infrastructure.Data.Migrations
 {
-    public partial class DBTablesCreation : Migration
+    public partial class DBTablesCreate2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -96,7 +96,7 @@ namespace BrokerPremium.Infrastructure.Data.Migrations
                     InsSuma = table.Column<decimal>(type: "decimal", nullable: false),
                     InsCommission = table.Column<decimal>(type: "decimal", nullable: false),
                     InsurerId = table.Column<int>(type: "int", nullable: false),
-                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -105,7 +105,8 @@ namespace BrokerPremium.Infrastructure.Data.Migrations
                         name: "FK_InsurancePolicies_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_InsurancePolicies_Insurers_InsurerId",
                         column: x => x.InsurerId,

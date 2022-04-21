@@ -50,6 +50,11 @@ namespace BrokerPremium.Infrastructure.Data.Models
         [ForeignKey(nameof(InsurerId))]
         public Insurer? Insurer { get; set; }
 
+        [Required]
+        public Guid CustomerId { get; set; }
+
+        [ForeignKey(nameof(CustomerId))]
+        public Customer Customer { get; set; }
 
     }
 }

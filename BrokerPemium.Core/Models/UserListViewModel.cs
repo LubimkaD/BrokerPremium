@@ -1,4 +1,4 @@
-﻿namespace Warehouse.Core.Models
+﻿namespace BrokerPremium.Core.Models
 {
     public class UserListViewModel
     {

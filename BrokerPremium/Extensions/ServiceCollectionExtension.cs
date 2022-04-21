@@ -2,7 +2,7 @@
 using BrokerPremium.Infrastructure.Data;
 using BrokerPremium.Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Warehouse.Core.Services;
+using BrokerPremium.Core.Services;
 
 namespace Micrososft.Extensions.DependecyInjection
 {
@@ -11,7 +11,7 @@ namespace Micrososft.Extensions.DependecyInjection
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IApplicationDbRepository, ApplicationDbRepository>();
-            services.AddScoped<IUserService, UserService>();
+            //services.AddScoped<IUserService, UserService>();
 
             return services;
         }
