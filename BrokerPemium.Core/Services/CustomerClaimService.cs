@@ -30,30 +30,52 @@ namespace BrokerPremium.Core.Services
                 throw new ArgumentException("Unknown customer");
             }
 
-            //var policy = await repo.All<InsurancePolicy>()
-            //  .FirstOrDefaultAsync(p => p.CustomerId == customer.Id);
+            var policy = await repo.All<InsurancePolicy>()
+              .FirstOrDefaultAsync(p => p.CustomerId == customer.Id);
 
-            //if (policy == null)
-            //{
-            //    throw new ArgumentException("Missing policy info");
-            //}
+            if (policy == null)
+            {
+                throw new ArgumentException("Missing policy info");
+            }
             //var claims = policy.InsClaims;
 
-            //var insObject = claims[0].ClaimedObjects.FirstOrDefault();
-            //if (insObject == null)
-            //{
-            //    throw new ArgumentException("Missing insured object");
-            //}
+            //var insObject = customerClaim.Claim.ClaimedObject.TypeOfObjectId;
+            
+            if (customerClaim.Claim.DateOfAccident < policy.DateValidFrom || customerClaim.Claim.DateOfAccident > policy.DateValidTo)
+            {
+                throw new ArgumentException("Invalid date of accident");
+            }
 
-            //var claim = new Claim()
-            //{
-            //    PolicyNumber = policy.PolicyNumber,
-            //    DateOfAccident = claims[0].DateOfAccident,
-            //    ImageOfClaim = claims[0].ImageOfClaim,
-            //    ClaimedObject = insObject
+            var insClaimRecord = new InsuranceClaim()
+            {
+                ClaimNumber = policy.PolicyNumber + (policy.InsClaims.Count + 1).ToString(),
+                PolicyNumber = policy.PolicyNumber,
+                StatusId = 1,
+                ClaimSum = 0,
+                ClaimCommission = 0,
+                DateOfAccident = customerClaim.Claim.DateOfAccident,
+                ImageOfClaim = customerClaim.Claim.ImageOfClaim
+            };
+            insClaimRecord.ClaimedObjects.Add(customerClaim.Claim.ClaimedObject);
 
-            //};
+            await repo.AddAsync<InsuranceClaim>(insClaimRecord);
 
+            int typeOfObjectId = 1;
+            if (customerClaim.Claim.ClaimedObject.TypeOfObjectId == '1')
+            {
+                typeOfObjectId = 1;
+            }
+            var insObjectRecord = new InsuredObject()
+            {
+                TypeOfObjectId = customerClaim.Claim.ClaimedObject.TypeOfObjectId,
+                Description = customerClaim.Claim.ClaimedObject.Description,
+                Image = customerClaim.Claim.ImageOfClaim
+            };
+
+            await repo.AddAsync<InsuredObject>(insObjectRecord);
+            policy.InsClaims.Add(insClaimRecord);
+            repo.Update<InsurancePolicy>(policy);
+            await repo.SaveChangesAsync();
         }
     }
 }
