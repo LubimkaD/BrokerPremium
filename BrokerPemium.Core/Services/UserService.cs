@@ -19,6 +19,12 @@ namespace BrokerPremium.Core.Services
         {
             repo = _repo;
         }
+
+        public async Task<IdentityUser> GetUserById(string id)
+        {
+            return await repo.GetByIdAsync<IdentityUser>(id);
+        }
+
         public async Task<IEnumerable<UserListViewModel>> GetUsers()
         {
             return await repo.All<IdentityUser>()
