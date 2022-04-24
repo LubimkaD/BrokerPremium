@@ -47,8 +47,30 @@ namespace BrokerPremium.Controllers
             return View(customers);
         }
 
+        [HttpGet]
+        [Route("Home/Customer/EditCustomer/{id?}")]
+        public async Task<IActionResult> EditCustomer(Guid id)
+        {
+            var customer = await service.GetCustomerForEdit(id);
+            var model = new CustomerEditViewModel()
+            {
+                Id = customer.Id,
+                Identificator = customer.Identificator,
+                IsCompany = customer.IsCompany,
+                Name = customer.Name,
+                Address = customer.Address,
+                Telefon = customer.Telefon,
+                Email = customer.Email,
+                DateValidFrom = customer.DateValidFrom
+            };
+
+            return View(model);
+        }
+
+
         [HttpPost]
-        public async Task<IActionResult> Edit(CustomerEditViewModel model)
+        [Route("Home/Customer/EditCustomer/{id?}")]
+        public async Task<IActionResult> EditCustomer(CustomerEditViewModel model)
         {
             if (!ModelState.IsValid)
             {

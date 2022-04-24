@@ -46,7 +46,7 @@ namespace BrokerPremium.Core.Services
             return true;
         }
 
-        public async Task<Customer> GetCustomerForEdit(string id)
+        public async Task<Customer> GetCustomerForEdit(Guid id)
         {
             return await repo.GetByIdAsync<Customer>(id);
         }
@@ -64,9 +64,31 @@ namespace BrokerPremium.Core.Services
                 .ToListAsync();
         }
 
-        public Task<bool> UpdateCustomer(CustomerEditViewModel model)
+        public async Task<bool> UpdateCustomer(CustomerEditViewModel model)
         {
-            throw new NotImplementedException();
+            var customer = new Customer()
+            {
+                Id = model.Id,
+                Identificator = model.Identificator,
+                IsCompany = model.IsCompany,
+                Name = model.Name,
+                Address = model.Address,
+                Telefon = model.Telefon,
+                Email = model.Email,
+                DateValidFrom = model.DateValidFrom
+            };
+            try
+            {
+                repo.Update<Customer>(customer);
+                await repo.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+
+            return true;
         }
     }
 }

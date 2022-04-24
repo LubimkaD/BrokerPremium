@@ -13,6 +13,7 @@ namespace Micrososft.Extensions.DependecyInjection
             services.AddScoped<IApplicationDbRepository, ApplicationDbRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IPolicyService, PolicyService>();
 
             return services;
         }

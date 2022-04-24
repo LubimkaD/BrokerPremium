@@ -38,8 +38,8 @@
                                 <td>@customer.Name</td>
                                 <td>@customer.IsCompany</td>
                                 <td>
-                                    <a asp-action="edit" asp-controller="customer" asp-route-id="@customer.Id" class="btn btn-block btn-outline-info btn-xs">Edit</a>
-                                    <a asp-action="policies" asp-controller="customer" asp-route-id="@customer.Id" class="btn btn-block btn-outline-warning btn-xs">Policies</a>
+                                    <a asp-area="" asp-action="EditCustomer" asp-controller="Customer" asp-route-id="@customer.Id" class="btn btn-block btn-outline-info btn-xs">Edit</a>
+                                    <a asp-area="" asp-action="Policies" asp-controller="Customer" asp-route-id="@customer.Id" class="btn btn-block btn-outline-warning btn-xs">Policies</a>
                                 </td>
                             </tr>
                         }

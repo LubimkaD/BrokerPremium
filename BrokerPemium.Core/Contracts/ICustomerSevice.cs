@@ -1,10 +1,5 @@
 ﻿using BrokerPremium.Core.Models;
 using BrokerPremium.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BrokerPremium.Core.Contracts
 {
@@ -12,7 +7,7 @@ namespace BrokerPremium.Core.Contracts
     {
         Task<IEnumerable<CustomerListViewModel>> GetCustomers();
 
-        Task<Customer> GetCustomerForEdit(string id);
+        Task<Customer> GetCustomerForEdit(Guid id);
 
         Task<bool> UpdateCustomer(CustomerEditViewModel model);
 

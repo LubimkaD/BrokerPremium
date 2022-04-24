@@ -11,6 +11,9 @@ namespace BrokerPremium.Core.Models
     public class CustomerEditViewModel
     {
         [Required]
+        public Guid Id { get; set; }
+
+        [Required]
         [StringLength(10)]
         public string? Identificator { get; set; }
 
