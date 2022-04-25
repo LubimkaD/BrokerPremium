@@ -14,9 +14,55 @@ namespace BrokerPremium.Core.Services
         {
             repo = _repo;
         }
-        public Task<bool> AddNewPolicy(PolicyEditViewModel model)
+        public async Task<bool> AddNewPolicy(PolicyEditViewModel model)
         {
-            throw new NotImplementedException();
+            var insurancePolicy = new InsurancePolicy()
+            {
+                PolicyNumber = model.PolicyNumber,
+                TypeOfInsuranceId = model.TypeOfInsuranceId,
+                DateValidFrom = model.DateValidFrom,
+                DateValidTo = model.DateValidTo,
+                InsSuma = model.InsSuma,
+                InsCommission = model.InsCommission,
+                InsurerId = model.InsurerId,
+                CustomerId = model.CustomerId
+            };
+
+            try
+            {
+                await repo.AddAsync<InsurancePolicy>(insurancePolicy);
+                await repo.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task<IEnumerable<CustomerViewModel>> GetCustomers()
+        {
+            return await repo.All<Customer>()
+                .Select(x => new CustomerViewModel()
+                {
+                    //CustomerIdentificator = x.Identificator,
+                    CustomerId = x.Id,
+                    CustomerName = x.Name
+                })
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<InsurerViewModel>> GetInsurers()
+        {
+            return await repo.All<Insurer>()
+                .Select(x => new InsurerViewModel()
+                {
+                    InsurerId = x.Id,
+                    InsurerName = x.Name,
+                })
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<PolicyListViewModel>> GetPolicies()
@@ -27,7 +73,7 @@ namespace BrokerPremium.Core.Services
                     Id = x.Id,
                     PolicyNumber = x.PolicyNumber,
                     TypeOfInsuranceId = x.TypeOfInsuranceId,
-                    TypeOfInsurance = x.TypeOfInsurance.Name.ToString(),
+                    //TypeOfInsurance = x.TypeOfInsurance.Name.ToString(),
                     DateValidFrom = x.DateValidFrom,
                     DateValidTo = x.DateValidTo,
                     InsSuma = x.InsSuma,
@@ -46,9 +92,21 @@ namespace BrokerPremium.Core.Services
             throw new NotImplementedException();
         }
 
+        public async Task<IEnumerable<TypeOfInsuranceViewModel>> GetTypeOfInsurances()
+        {
+            return await repo.All<TypeOfInsurance>()
+                .Select(x => new TypeOfInsuranceViewModel()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                })
+                .ToListAsync();
+        }
+
         public Task<bool> UpdatePolicy(PolicyEditViewModel model)
         {
             throw new NotImplementedException();
         }
+
     }
 }

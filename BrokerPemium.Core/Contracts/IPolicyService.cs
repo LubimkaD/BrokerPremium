@@ -14,5 +14,11 @@ namespace BrokerPremium.Core.Contracts
         Task<bool> UpdatePolicy(PolicyEditViewModel model);
 
         Task<bool> AddNewPolicy(PolicyEditViewModel model);
+
+        Task<IEnumerable<TypeOfInsuranceViewModel>> GetTypeOfInsurances();
+
+        Task<IEnumerable<InsurerViewModel>> GetInsurers();
+
+        Task<IEnumerable<CustomerViewModel>> GetCustomers();
     }
 }

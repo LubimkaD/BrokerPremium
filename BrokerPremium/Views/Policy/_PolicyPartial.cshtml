@@ -1,5 +1,10 @@
 ﻿@using BrokerPremium.Core.Models
-@model CustomerEditViewModel
+@model PolicyEditViewModel;
+@{
+    var items = ViewBag.TypeOfInsuranceItems;
+    var itemsInsurers = ViewBag.InsurerItems;
+    var itemsCustomers = ViewBag.CustomerItems;
+}
 
 <div class="row">
     <div class="col-4">
@@ -7,40 +12,108 @@
             
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating">
-                <label asp-for="Identificator" class="form-label"></label>
-                <input asp-for="Identificator" class="form-control" aria-required="true" />
-                <span asp-validation-for="Identificator" class="text-danger"></span>
+                <label asp-for="PolicyNumber" class="form-label"></label>
+                <input asp-for="PolicyNumber" class="form-control" aria-required="true" />
+                <span asp-validation-for="PolicyNumber" class="text-danger"></span>
             </div>
+            
+                    
+            <div class="row">
+    <div class="col-4">
+        <form id="TypeOfInsurance" method="post">
+            <input type="hidden" name="TypeOfInsuranceId" value="@Model.TypeOfInsuranceId" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating">
-                <label asp-for="IsCompany" class="form-label"></label>
-                <input asp-for="IsCompany" class="form-control" aria-required="true" />
-                <span asp-validation-for="IsCompany" class="text-danger"></span>
+                <div class="form-group">
+                    <label>Type Of Insurance</label>
+                    <select asp-for="TypeOfInsuranceId" asp-items="@items" class="form-control">
+                       
+                    </select>
+                </div>
             </div>
-            <div class="form-floating">
-                <label asp-for="Name" class="form-label"></label>
-                <input asp-for="Name" class="form-control"  aria-required="true" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                <label asp-for="Address" class="form-label"></label>
-                <input asp-for="Address" class="form-control"  aria-required="true" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                <label asp-for="Telefon" class="form-label"></label>
-                <input asp-for="Telefon" class="form-control"  aria-required="true" />
-                <span asp-validation-for="Telefon" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                <label asp-for="Email" class="form-label"></label>
-                <input asp-for="Email" class="form-control"  aria-required="true" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
+            <div class="row">&nbsp;</div>
+            @*div class="row">
+                <div class="col-4">
+                    <button id="login-submit" type="submit" class="btn btn-primary btn-block">Submit</button>
+                </div>
+                <!-- /.col -->
+            </div>*@
+        </form>
+    </div>
+</div>
+
+
             <div class="form-floating">
                 <label asp-for="DateValidFrom" class="form-label"></label>
                 <input asp-for="DateValidFrom" class="form-control"  aria-required="true" />
                 <span asp-validation-for="DateValidFrom" class="text-danger"></span>
             </div>
+            <div class="form-floating">
+                <label asp-for="DateValidTo" class="form-label"></label>
+                <input asp-for="DateValidTo" class="form-control"  aria-required="true" />
+                <span asp-validation-for="DateValidTo" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <label asp-for="InsSuma" class="form-label"></label>
+                <input asp-for="InsSuma" class="form-control"  aria-required="true" />
+                <span asp-validation-for="InsSuma" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <label asp-for="InsCommission" class="form-label"></label>
+                <input asp-for="InsCommission" class="form-control"  aria-required="true" />
+                <span asp-validation-for="InsCommission" class="text-danger"></span>
+            </div>
+
+            
+<div class="row">
+    <div class="col-4">
+        <form id="Insurer" method="post">
+            <input type="hidden" name="InsurerId" value="@Model.InsurerId" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-floating">
+                <div class="form-group">
+                    <label>Insurers</label>
+                    <select asp-for="InsurerId" asp-items="@itemsInsurers" class="form-control">
+                       
+                    </select>
+                </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            @*div class="row">
+                <div class="col-4">
+                    <button id="login-submit" type="submit" class="btn btn-primary btn-block">Submit</button>
+                </div>
+                <!-- /.col -->
+            </div>*@
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-4">
+        <form id="Customer" method="post">
+            <input type="hidden" name="CustomerId" value="@Model.CustomerId" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-floating">
+                <div class="form-group">
+                    <label>Customers</label>
+                    <select asp-for="CustomerId" asp-items="@itemsCustomers" class="form-control">
+                       
+                    </select>
+                </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            @*div class="row">
+                <div class="col-4">
+                    <button id="login-submit" type="submit" class="btn btn-primary btn-block">Submit</button>
+                </div>
+                <!-- /.col -->
+            </div>*@
+        </form>
+    </div>
+</div>
+
+
             <div class="row">&nbsp;</div>
             <div class="row">
                 <div class="col-4">
@@ -51,7 +124,9 @@
         </form>
     </div>
 </div>
-
+@{
+    ;
+}
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

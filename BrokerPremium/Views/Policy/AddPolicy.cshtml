@@ -3,7 +3,8 @@
 
 @{
     ViewData["Title"] = "Add New Policy";
+    var items = ViewBag.TypeOfInsuranceItems;
 }
 
-<a class="navbar-brand" asp-area="" asp-controller="Policy" asp-action="AddPoicy">BrokerPremium</a>
+<a class="navbar-brand" asp-area="" asp-controller="Policy" asp-action="AddPolicy">BrokerPremium</a>
 <partial name="_PolicyPartial" />

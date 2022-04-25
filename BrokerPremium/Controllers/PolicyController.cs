@@ -2,6 +2,7 @@
 using BrokerPremium.Core.Contracts;
 using BrokerPremium.Core.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BrokerPremium.Controllers
 {
@@ -16,6 +17,41 @@ namespace BrokerPremium.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public async Task<IActionResult> AddPolicy()
+        {
+            var model = new PolicyEditViewModel();
+
+            //TypeOfInsurace Selection
+            ViewBag.TypeOfInsuranceItems = service.GetTypeOfInsurances()
+                .Result
+                .Select(r => new SelectListItem()
+                {
+                    Text = r.Name,
+                    Value = r.Id.ToString(),
+                    Selected = false
+                });
+
+            ViewBag.InsurerItems = service.GetInsurers()
+                .Result
+                .Select(r => new SelectListItem()
+                {
+                    Text = r.InsurerName,
+                    Value = r.InsurerId.ToString(),
+                    Selected = false
+                });
+
+            ViewBag.CustomerItems = service.GetCustomers()
+                .Result
+                .Select(r => new SelectListItem()
+                {
+                    Text = r.CustomerName,
+                    Value = r.CustomerId.ToString(),
+                    Selected = false
+                });
+
+            return View(model);
         }
 
         [HttpPost]
@@ -53,21 +89,21 @@ namespace BrokerPremium.Controllers
             var policy = await service.GetPolicyForEdit(id);
             var model = new PolicyEditViewModel()
             {
-                Id = policy.Id,
+                //Id = policy.Id,
                 PolicyNumber= policy.PolicyNumber,
                 TypeOfInsuranceId = policy.TypeOfInsuranceId,
-                TypeOfInsurance = policy.TypeOfInsurance.Name,
+                //TypeOfInsurance = policy.TypeOfInsurance.Name,
                 DateValidFrom = policy.DateValidFrom,
                 DateValidTo = policy.DateValidTo,
                 InsSuma = policy.InsSuma,
                 InsCommission = policy.InsCommission,
-                InsuredObjects = policy.InsuredObjects,
-                InsClaims = policy.InsClaims,
+                //InsuredObjects = policy.InsuredObjects,
+                //InsClaims = policy.InsClaims,
                 InsurerId = policy.InsurerId,
-                InsurerName = policy.Insurer.Name,
+                //InsurerName = policy.Insurer.Name,
                 CustomerId = policy.CustomerId,
-                CustomerIdentificator = policy.Customer.Identificator,
-                CustomerName = policy.Customer.Name
+                //CustomerIdentificator = policy.Customer.Identificator,
+                //CustomerName = policy.Customer.Name
             };
 
             return View(model);
