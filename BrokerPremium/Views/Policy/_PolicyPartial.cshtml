@@ -19,28 +19,28 @@
             
                     
             <div class="row">
-    <div class="col-4">
-        <form id="TypeOfInsurance" method="post">
-            <input type="hidden" name="TypeOfInsuranceId" value="@Model.TypeOfInsuranceId" />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating">
-                <div class="form-group">
-                    <label>Type Of Insurance</label>
-                    <select asp-for="TypeOfInsuranceId" asp-items="@items" class="form-control">
-                       
-                    </select>
+            <div class="col-4">
+                <div id="TypeOfInsurance" method="post">
+                   <!--<input type="hidden" name="TypeOfInsuranceId" value="TypeOfInsuranceId" />-->
+                   <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                   <div class="form-floating">
+                       <div class="form-group">
+                          <label asp-for="TypeOfInsuranceId">Type Of Insurance</label>
+                          <select asp-for="TypeOfInsuranceId" asp-items="@items" class="form-control">
+                                   
+                          </select>
+                       </div>
+                   </div>
+                   <div class="row">&nbsp;</div>
+                       @*<div class="row">
+                          <div class="col-4">
+                              <button id="login-submit" type="submit" class="btn btn-primary btn-block">Submit</button>
+                          </div>
+                          <!-- /.col -->
+                       </div>*@
                 </div>
             </div>
-            <div class="row">&nbsp;</div>
-            @*div class="row">
-                <div class="col-4">
-                    <button id="login-submit" type="submit" class="btn btn-primary btn-block">Submit</button>
-                </div>
-                <!-- /.col -->
-            </div>*@
-        </form>
-    </div>
-</div>
+            </div>
 
 
             <div class="form-floating">
@@ -65,68 +65,70 @@
             </div>
 
             
-<div class="row">
-    <div class="col-4">
-        <form id="Insurer" method="post">
-            <input type="hidden" name="InsurerId" value="@Model.InsurerId" />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating">
-                <div class="form-group">
-                    <label>Insurers</label>
-                    <select asp-for="InsurerId" asp-items="@itemsInsurers" class="form-control">
+            <div class="row">
+            <div class="col-4">
+                <div id="Insurer" method="post">
+                    <!--<input type="hidden" name="InsurerId" value="@Model.InsurerId" />-->
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-floating">
+                        <div class="form-group">
+                            <label asp-for="InsurerId">Insurers</label>
+                            <select asp-for="InsurerId" asp-items="@itemsInsurers" class="form-control">
                        
-                    </select>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">&nbsp;</div>
+                    @*div class="row">
+                        <div class="col-4">
+                           <button id="login-submit" type="submit" class="btn btn-primary btn-block">Submit</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>*@
                 </div>
             </div>
-            <div class="row">&nbsp;</div>
-            @*div class="row">
-                <div class="col-4">
-                    <button id="login-submit" type="submit" class="btn btn-primary btn-block">Submit</button>
-                </div>
-                <!-- /.col -->
-            </div>*@
-        </form>
-    </div>
-</div>
+            </div>
 
-<div class="row">
-    <div class="col-4">
-        <form id="Customer" method="post">
-            <input type="hidden" name="CustomerId" value="@Model.CustomerId" />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating">
-                <div class="form-group">
-                    <label>Customers</label>
-                    <select asp-for="CustomerId" asp-items="@itemsCustomers" class="form-control">
+            <div class="row">
+            <div class="col-4">
+                <div id="Customer" method="post">
+                     <!--<input type="hidden" name="CustomerId" value="@Model.CustomerId" />-->
+                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                     <div class="form-floating">
+                          <div class="form-group">
+                              <label asp-for="CustomerId">Customers</label>
+                              <select asp-for="CustomerId" asp-items="@itemsCustomers" class="form-control">
                        
-                    </select>
+                              </select>
+                          </div>
+                     </div>
+                     <div class="row">&nbsp;</div>
+                     @*div class="row">
+                     <div class="col-4">
+                         <button id="login-submit" type="submit" class="btn btn-primary btn-block">Submit</button>
+                     </div>
+                
+                      </div>*@
                 </div>
             </div>
-            <div class="row">&nbsp;</div>
-            @*div class="row">
-                <div class="col-4">
-                    <button id="login-submit" type="submit" class="btn btn-primary btn-block">Submit</button>
-                </div>
-                <!-- /.col -->
-            </div>*@
-        </form>
-    </div>
-</div>
+            </div>
 
 
             <div class="row">&nbsp;</div>
             <div class="row">
                 <div class="col-4">
-                    <button id="login-submit" type="submit" class="btn btn-primary btn-block">Submit</button>
+                    <button id="login-submit" type="submit" class="btn btn-primary btn-block" onclick="getOption(@Model)">Submit</button>
                 </div>
                 <!-- /.col -->
             </div>
         </form>
+        <p> The value of the option selected is:
+        <span id="output"></span>
+    </p>
     </div>
 </div>
-@{
-    ;
-}
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
 }

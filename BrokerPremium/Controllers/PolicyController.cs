@@ -59,6 +59,32 @@ namespace BrokerPremium.Controllers
         {
             if (!ModelState.IsValid)
             {
+                ViewBag.TypeOfInsuranceItems = service.GetTypeOfInsurances()
+                .Result
+                .Select(r => new SelectListItem()
+                {
+                    Text = r.Name,
+                    Value = r.Id.ToString(),
+                    Selected = false
+                });
+
+                ViewBag.InsurerItems = service.GetInsurers()
+                    .Result
+                    .Select(r => new SelectListItem()
+                    {
+                        Text = r.InsurerName,
+                        Value = r.InsurerId.ToString(),
+                        Selected = false
+                    });
+
+                ViewBag.CustomerItems = service.GetCustomers()
+                    .Result
+                    .Select(r => new SelectListItem()
+                    {
+                        Text = r.CustomerName,
+                        Value = r.CustomerId.ToString(),
+                        Selected = false
+                    });
                 return View(model);
             }
 

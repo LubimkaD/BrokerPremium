@@ -73,7 +73,7 @@ namespace BrokerPremium.Core.Services
                     Id = x.Id,
                     PolicyNumber = x.PolicyNumber,
                     TypeOfInsuranceId = x.TypeOfInsuranceId,
-                    //TypeOfInsurance = x.TypeOfInsurance.Name.ToString(),
+                    TypeOfInsurance = x.TypeOfInsurance.Name,
                     DateValidFrom = x.DateValidFrom,
                     DateValidTo = x.DateValidTo,
                     InsSuma = x.InsSuma,

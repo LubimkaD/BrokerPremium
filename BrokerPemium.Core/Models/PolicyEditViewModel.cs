@@ -29,7 +29,7 @@ namespace BrokerPremium.Core.Models
         public DateTime DateValidFrom { get; set; } = DateTime.Today;
 
         [Column(TypeName = "date")]
-        public DateTime? DateValidTo { get; set; }
+        public DateTime? DateValidTo { get; set; } = DateTime.Today.AddYears(1);
 
         [Required]
         [Range(0, 200000)]
