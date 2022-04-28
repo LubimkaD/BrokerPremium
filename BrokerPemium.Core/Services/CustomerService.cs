@@ -64,6 +64,31 @@ namespace BrokerPremium.Core.Services
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<PolicyListViewModel>> GetPoliciesForCustomer(Guid id)
+    {
+            IEnumerable<PolicyListViewModel> policies = await repo.All<InsurancePolicy>()
+                .Where(p => p.CustomerId == id)
+                .Select(x => new PolicyListViewModel()
+                {
+                    Id = x.Id,
+                    PolicyNumber = x.PolicyNumber,
+                    TypeOfInsuranceId = x.TypeOfInsuranceId,
+                    TypeOfInsurance = x.TypeOfInsurance.Name,
+                    DateValidFrom = x.DateValidFrom,
+                    DateValidTo = x.DateValidTo,
+                    InsSuma = x.InsSuma,
+                    CustomerId = id,
+                    CustomerName = x.Customer.Name
+                })
+                .ToListAsync();
+
+            if (policies.Count() == 0)
+            {
+                throw new ArgumentException("Няма полици за този клиент!");
+            };
+            return policies;
+        }
+
         public async Task<bool> UpdateCustomer(CustomerEditViewModel model)
         {
             var customer = new Customer()

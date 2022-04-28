@@ -82,11 +82,7 @@ namespace BrokerPremium.Core.Services
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<PolicyListViewModel>> GetPoliciesForCustomer(Guid id)
-        {
-            return await GetPolicies();
-         }
-
+        
         public Task<InsurancePolicy> GetPolicyForEdit(Guid id)
         {
             throw new NotImplementedException();

@@ -88,5 +88,25 @@ namespace BrokerPremium.Controllers
 
             return View(model);
         }
+
+        [Route("Home/Customer/Policies/{id?}")]
+        public async Task<IActionResult> Policies(Guid id)
+        {
+            try
+            {
+                var policies = await service.GetPoliciesForCustomer(id);
+                return View(policies);
+            }
+            catch (ArgumentException ae)
+            {
+
+                ViewData[MessageConstant.ErrorMessage] = "Възникна грешка!";
+
+                return Redirect("/");
+            }
+            
+
+            
+        }
     }
 }

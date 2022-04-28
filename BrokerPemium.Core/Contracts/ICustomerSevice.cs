@@ -12,5 +12,8 @@ namespace BrokerPremium.Core.Contracts
         Task<bool> UpdateCustomer(CustomerEditViewModel model);
 
         Task<bool> AddNewCustomer(CustomerEditViewModel model);
+
+        Task<IEnumerable<PolicyListViewModel>> GetPoliciesForCustomer(Guid id);
+
     }
 }

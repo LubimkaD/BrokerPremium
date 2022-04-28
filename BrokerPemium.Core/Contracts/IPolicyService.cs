@@ -7,8 +7,6 @@ namespace BrokerPremium.Core.Contracts
     {
         Task<IEnumerable<PolicyListViewModel>> GetPolicies();
 
-        Task<IEnumerable<PolicyListViewModel>> GetPoliciesForCustomer(Guid id);
-
         Task<InsurancePolicy> GetPolicyForEdit(Guid id);
 
         Task<bool> UpdatePolicy(PolicyEditViewModel model);
