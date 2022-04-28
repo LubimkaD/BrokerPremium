@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BrokerPremium.Test
 {
-    public class AddNewCustomerTest
+    public class CustomerTest
     {
         private ServiceProvider serviceProvider;
         private InMemoryDbContext dbContext;
@@ -73,6 +73,21 @@ namespace BrokerPremium.Test
                 Assert.IsTrue(await service.UpdateCustomer(newModelCustomer));
             }
             
+        }
+
+        [Test]
+        public async Task AssertTestGetCustomerById()
+        {
+            var service = serviceProvider.GetService<ICustomerService>();
+            var repo = serviceProvider.GetService<IApplicationDbRepository>();
+            var customer = await repo.All<Customer>()
+                .FirstOrDefaultAsync(c => c.Identificator == "123");
+            if (customer != null)
+            {
+                var newCustomer = await service.GetCustomerForEdit(customer.Id);
+                Assert.IsTrue(customer.Id == newCustomer.Id);
+            }
+
         }
 
         [TearDown]
