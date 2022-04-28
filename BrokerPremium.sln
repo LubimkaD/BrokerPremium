@@ -12,6 +12,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrokerPremium.API", "BrokerPremium.API\BrokerPremium.API.csproj", "{AE3ED95E-B9D3-4FBE-9E3D-952140449036}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrokerPremium.Test", "BrokerPremium.Test\BrokerPremium.Test.csproj", "{7C5A04DE-A708-4D2C-A26C-193E80C93C5B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5FBEA663-1B3E-4E96-ABCA-E0319BD5478B} = {5FBEA663-1B3E-4E96-ABCA-E0319BD5478B}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
